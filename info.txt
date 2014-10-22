@@ -1,5 +1,0 @@
-Hinweis: die folgenden Dateien sind nicht im Archiv enthalten, da sie lediglich verlinkt wurden:
-13July_19xxxx.7z
-numeric_20140712.7z
-numeric_20140713.7z
-numeric_20140714.7z
