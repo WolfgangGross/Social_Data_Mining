@@ -9,6 +9,6 @@ check is reading resulted in correced data format -> read worked
 count tweets per:
   -timestamp
   -minute
-  -hour
+  -hour     <- done
 
 parse Text for Goal!!
