@@ -6,7 +6,7 @@
 #setting envioronment
 library(ggplot2)
 library(data.table)
-setwd("~/Documents/programmierung/Social_Data_Mining")
+setwd("~/Documents/programmierung/Social Data Mining All")
 
 #####################
 #loading data in
