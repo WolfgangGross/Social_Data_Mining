@@ -8,8 +8,8 @@ setwd("~/Documents/Coxi/WS1415/Social Data Mining/Data/Clean")
 #setwd("~/Documents/programmierung/Social Data Mining All")
 
 #####################
-#loading data in
-
+#loading & saving data 
+ 
 #build in R Routines for reading CSV
 #dat <- read.csv('13July_19xxxx.csv',sep='\t')
 #dat <- read.csv('13July_19xxxx_with_semi2.csv',sep=';')
