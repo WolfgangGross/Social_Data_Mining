@@ -4,7 +4,7 @@ library(ggplot2)
 library(bit64)
 library(data.table)
 #setwd("~/Documents/Coxi/WS1415/Social Data Mining/Data/")
-#setwd("~/Documents/programmierung/Social Data Mining All")
+setwd("~/Documents/programmierung/Social Data Mining All")
 
 #####################
 #loading & saving data
@@ -12,7 +12,8 @@ library(data.table)
 #dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/13July_xxxx.Rda")
 
 #2014-07-12
-dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/numeric_20140712.Rda")
+#dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/numeric_20140712.Rda")
+dat <- readRDS(file="numeric_20140712.Rda")
 
 #2014-07-13
 #dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/numeric_20140713.Rda")
@@ -37,7 +38,8 @@ for(k in 1:(length(sumMinute)/60)){sumHour <- append(sumHour,sum(sumMinute[(k*60
 #####################
 #plot
 #convert Time into real time format
-timeReal <- strptime(as.character(times),format="%Y%m%d%H%M%S")
+realTime <- strptime(as.character(times),format="%Y%m%d%H%M%S")
+Tweet.count <- count$Freq
 
-df <- data.frame(timeReal,count$Freq)
-ggplot(df,aes(x=timeReal,y=count$Freq)) + geom_line()
+df <- data.frame(realTime,Tweet.count)
+ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
