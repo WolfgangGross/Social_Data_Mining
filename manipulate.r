@@ -3,16 +3,16 @@
 library(ggplot2)
 library(bit64)
 library(data.table)
-setwd("~/Documents/Coxi/WS1415/Social Data Mining/Data/")
+#setwd("~/Documents/Coxi/WS1415/Social Data Mining/Data/")
 #setwd("~/Documents/programmierung/Social Data Mining All")
 
 #####################
 #loading & saving data
 #small_13-July_file
-dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/13July_xxxx.Rda")
+#dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/13July_xxxx.Rda")
 
 #2014-07-12
-#dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/numeric_20140712.Rda")
+dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/numeric_20140712.Rda")
 
 #2014-07-13
 #dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/numeric_20140713.Rda")
