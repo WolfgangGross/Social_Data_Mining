@@ -5,7 +5,7 @@
 library(bit64)
 library(data.table)
 setwd("~/Documents/Coxi/WS1415/Social Data Mining/Data/Clean")
-#setwd("~/Documents/programmierung/Social Data Mining All")
+setwd("~/Documents/programmierung/Social Data Mining All")
 
 #####################
 #loading & saving data 
