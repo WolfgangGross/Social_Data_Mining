@@ -31,9 +31,9 @@ count  <- data.frame(table(dat$V3))
 
 #sum up per minute and per hour
 sumMinute <- c()
-for(i in 1:as.integer(length(count$Freq)/60)){sumMinute <- append(sumMinute,sum(count$Freq[(i*60-59):(i*60)]))}
+for(i in seq(1,length(count$Freq),60)){sumMinute <- append(sumMinute,sum(count$Freq[i:(i+60)]))}
 sumHour <- c()
-for(k in 1:(length(sumMinute)/60)){sumHour <- append(sumHour,sum(sumMinute[(k*60-59):(k*60)]))}
+for(k in seq(1,length(count$Freq),3600)){sumHour <- append(sumHour,sum(count$Freq[k:(k+3600)]))}
 
 #####################
 #plot
@@ -43,3 +43,13 @@ Tweet.count <- count$Freq
 
 df <- data.frame(realTime,Tweet.count)
 ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
+
+#plot tweets per minute
+minuteTimestamps <- realTime[seq(1, length(realTime), 60)]
+minutePlotDf <- data.frame(minuteTimestamps,sumMinute)
+ggplot(minutePlotDf,aes(x=minuteTimestamps,y=sumMinute)) + geom_line()
+
+#plot tweets per minute
+hourTimestamps <- realTime[seq(1, length(realTime), 3600)]
+hourPlotDf <- data.frame(hourTimestamps,sumHour)
+ggplot(hourPlotDf,aes(x=hourTimestamps,y=sumHour)) + geom_line()
