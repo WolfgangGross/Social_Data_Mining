@@ -33,7 +33,7 @@
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
     <h1>Social Data Mining</h1>
-    <h2>Task 1</h2>
+    <h2>Report</h2>
     <p>Wolfgang Gross - Ramona Leenings<br/></p>
   </hgroup>
   <article></article>  
@@ -43,10 +43,17 @@
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
   <hgroup>
-    <h2>First Steps</h2>
+    <h2>First Steps - Task 1</h2>
   </hgroup>
   <article data-timings="">
-    <p>Fisrt we started...</p>
+    <p>First we started with:</p>
+
+<ol>
+<li>Looking at the Data</li>
+<li>Decided to work with R</li>
+<li>Find we need a prepreocessing we couln&#39;t do wiht R</li>
+<li>Write a small programm reading and cleaning the raw dat in .NET Framework</li>
+</ol>
 
   </article>
   <!-- Presenter Notes -->
@@ -57,7 +64,78 @@
     <h2>Data Cleaning</h2>
   </hgroup>
   <article data-timings="">
-    
+    <pre><code>code here
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Data in R</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Load and save Data</p>
+
+<pre><code class="r">dat_twelve &lt;- fread(&#39;numeric_20140712.csv&#39;,header=F,sep=&#39;;&#39;)
+saveRDS(&quot;numeric_20140712.Rda&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Working on the Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">count  &lt;- data.frame(table(dat$V3))
+count$Var1[1:5]
+</code></pre>
+
+<pre><code>## [1] 20140712000000 20140712000001 20140712000002 20140712000003
+## [5] 20140712000004
+## 85765 Levels: 20140712000000 20140712000001 20140712000002 ... 20140712235959
+</code></pre>
+
+<pre><code class="r">sumMinute &lt;- c()
+for(i in seq(1,length(count$Freq),60)){sumMinute &lt;- append(sumMinute,sum(count$Freq[i:(i+60)]))}
+sumHour &lt;- c()
+for(k in seq(1,length(count$Freq),3600)){sumHour &lt;- append(sumHour,sum(count$Freq[k:(k+3600)]))}
+realTime &lt;- strptime(as.character(count$Var1),format=&quot;%Y%m%d%H%M%S&quot;)
+Tweet.count &lt;- count$Freq
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Plot the Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">df &lt;- data.frame(realTime,Tweet.count)
+ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Tweets per Second - Minute - Hour</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Plot wiht different time resolutions</p>
+
+<p><img src="figure/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6"> <img src="figure/unnamed-chunk-6-2.png" alt="plot of chunk unnamed-chunk-6"> <img src="figure/unnamed-chunk-6-3.png" alt="plot of chunk unnamed-chunk-6"> </p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -68,7 +146,7 @@
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='First Steps'>
+        data-slide=1 title='First Steps - Task 1'>
          1
       </a>
     </li>
@@ -76,6 +154,30 @@
       <a href="#" target="_self" rel='tooltip' 
         data-slide=2 title='Data Cleaning'>
          2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Data in R'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Working on the Data'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Plot the Data'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Tweets per Second - Minute - Hour'>
+         6
       </a>
     </li>
   </ul>
