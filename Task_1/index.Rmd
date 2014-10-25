@@ -1,6 +1,6 @@
 ---
 title       : Social Data Mining
-subtitle    : Task 1
+subtitle    : Report
 author      : Wolfgang Gross - Ramona Leenings
 job         : 
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -12,13 +12,82 @@ knit        : slidify::knit2slides
 ---
 
 
-## First Steps
+## First Steps - Task 1
 
-First we started...
+First we started with:
+
+1. Looking at the Data
+2. Decided to work with R
+3. Find we need a prepreocessing we couln't do wiht R
+4. Write a small programm reading and cleaning the raw dat in .NET Framework
 
 
 ---
 ## Data Cleaning
 
+```
+code here
+```
 
+---
+## Data in R
+Load and save Data
+```{r,eval=FALSE}
+
+dat_twelve <- fread('numeric_20140712.csv',header=F,sep=';')
+saveRDS("numeric_20140712.Rda")
+```
+
+```{r,echo=FALSE,results='hide',message=FALSE}
+library(ggplot2)
+library(bit64)
+dat <- readRDS(file="~/Documents/programmierung/Social Data Mining All/numeric_20140712.Rda")
+```
+
+---
+
+## Working on the Data
+```{r}
+count  <- data.frame(table(dat$V3))
+count$Var1[1:5]
+```
+
+```{r}
+sumMinute <- c()
+for(i in seq(1,length(count$Freq),60)){sumMinute <- append(sumMinute,sum(count$Freq[i:(i+60)]))}
+sumHour <- c()
+for(k in seq(1,length(count$Freq),3600)){sumHour <- append(sumHour,sum(count$Freq[k:(k+3600)]))}
+realTime <- strptime(as.character(count$Var1),format="%Y%m%d%H%M%S")
+Tweet.count <- count$Freq
+```
+
+
+
+---
+## Plot the Data
+```{r, fig.width=12,fig.height=6}
+df <- data.frame(realTime,Tweet.count)
+ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
+```
+
+---
+## Tweets per Second - Minute - Hour
+Plot wiht different time resolutions
+
+```{r,echo=FALSE, fig.width=4,fig.height=6,warning=FALSE}
+df <- data.frame(realTime,Tweet.count)
+ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
+
+
+#plot tweets per minute
+minuteTimestamps <- realTime[seq(1, length(realTime), 60)]
+minutePlotDf <- data.frame(minuteTimestamps,sumMinute)
+ggplot(minutePlotDf,aes(x=minuteTimestamps,y=sumMinute)) + geom_line()
+
+
+#plot tweets per minute
+hourTimestamps <- realTime[seq(1, length(realTime), 3600)]
+hourPlotDf <- data.frame(hourTimestamps,sumHour)
+ggplot(hourPlotDf,aes(x=hourTimestamps,y=sumHour)) + geom_line()
+```
 

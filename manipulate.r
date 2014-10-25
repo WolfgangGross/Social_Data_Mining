@@ -38,7 +38,7 @@ for(k in seq(1,length(count$Freq),3600)){sumHour <- append(sumHour,sum(count$Fre
 #####################
 #plot
 #convert Time into real time format
-realTime <- strptime(as.character(times),format="%Y%m%d%H%M%S")
+realTime <- strptime(as.character(count$Var1),format="%Y%m%d%H%M%S")
 Tweet.count <- count$Freq
 
 df <- data.frame(realTime,Tweet.count)
