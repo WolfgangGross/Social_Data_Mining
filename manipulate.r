@@ -13,7 +13,7 @@ setwd("~/Documents/programmierung/Social Data Mining All")
 
 #2014-07-12
 #dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/numeric_20140712.Rda")
-dat <- readRDS(file="numeric_20140712.Rda")
+
 
 #2014-07-13
 #dat <- readRDS(file="~/Coxi/WS1415/Social Data Mining/Data/Rda/numeric_20140713.Rda")
