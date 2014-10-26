@@ -18,7 +18,7 @@ First we started with:
 
 1. Looking at the Data
 2. Decided to work with R
-3. Find we need a prepreocessing we couln't do wiht R
+3. Find we need a preprocessing we couldn't do within R
 4. Write a small programm reading and cleaning the raw dat in .NET Framework
 
 
@@ -90,3 +90,4 @@ hourTimestamps <- realTime[seq(1, length(realTime), 3600)]
 hourPlotDf <- data.frame(hourTimestamps,sumHour)
 ggplot(hourPlotDf,aes(x=hourTimestamps,y=sumHour)) + geom_line()
 ```
+
