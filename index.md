@@ -25,8 +25,13 @@ First we started with:
 ---
 ## Data Cleaning
 
-```
-code here
+```{}
+Dim sr As StreamReader = New StreamReader(inputpath + file)
+Dim sw As StreamWriter = New StreamWriter(outputpath + file)
+
+'Read every line
+Dim line As String
+line = sr.ReadLine()
 ```
 
 ---
@@ -36,6 +41,7 @@ Load and save Data
 ```r
 dat_twelve <- fread('numeric_20140712.csv',header=F,sep=';')
 saveRDS("numeric_20140712.Rda")
+dat <- readRDS(file="numeric_20140712.Rda")
 ```
 
 
@@ -47,12 +53,6 @@ saveRDS("numeric_20140712.Rda")
 ```r
 count  <- data.frame(table(dat$V3))
 count$Var1[1:5]
-```
-
-```
-## [1] 20140712000000 20140712000001 20140712000002 20140712000003
-## [5] 20140712000004
-## 85765 Levels: 20140712000000 20140712000001 20140712000002 ... 20140712235959
 ```
 
 
@@ -75,11 +75,20 @@ df <- data.frame(realTime,Tweet.count)
 ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
+```r
+ggplot(dat1,aes(x=time,y=count)) + geom_line()
+```
+
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
 
 ---
 ## Tweets per Second - Minute - Hour
 Plot wiht different time resolutions
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) ![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-2.png) ![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-3.png) 
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png) ![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-2.png) ![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-3.png) 
 
+---
+## Tweets per Day
+Plots for July the 12th - 13th - 14 | Tweets per minute
+
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-2.png) ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-3.png) 

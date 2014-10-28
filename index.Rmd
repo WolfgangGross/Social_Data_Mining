@@ -25,8 +25,13 @@ First we started with:
 ---
 ## Data Cleaning
 
-```
-code here
+```{}
+Dim sr As StreamReader = New StreamReader(inputpath + file)
+Dim sw As StreamWriter = New StreamWriter(outputpath + file)
+
+'Read every line
+Dim line As String
+line = sr.ReadLine()
 ```
 
 ---
@@ -36,23 +41,28 @@ Load and save Data
 
 dat_twelve <- fread('numeric_20140712.csv',header=F,sep=';')
 saveRDS("numeric_20140712.Rda")
+dat <- readRDS(file="numeric_20140712.Rda")
 ```
 
 ```{r,echo=FALSE,results='hide',message=FALSE}
 library(ggplot2)
 library(bit64)
-dat <- readRDS(file="~/Documents/programmierung/Social Data Mining All/numeric_20140712.Rda")
+dat1 <- readRDS(file="~/Documents/programmierung/Social Data Mining All/plot_second12.Rda")
+dat2 <- readRDS(file="~/Documents/programmierung/Social Data Mining All/plot_minute12.Rda")
+dat3 <- readRDS(file="~/Documents/programmierung/Social Data Mining All/plot_hour12.Rda")
+dat4 <- readRDS(file="~/Documents/programmierung/Social Data Mining All/plot_minute13.Rda")
+dat5 <- readRDS(file="~/Documents/programmierung/Social Data Mining All/plot_minute14.Rda")
 ```
 
 ---
 
 ## Working on the Data
-```{r}
+```{r,eval=FALSE,}
 count  <- data.frame(table(dat$V3))
 count$Var1[1:5]
 ```
 
-```{r}
+```{r,eval=FALSE,}
 sumMinute <- c()
 for(i in seq(1,length(count$Freq),60)){sumMinute <- append(sumMinute,sum(count$Freq[i:(i+60)]))}
 sumHour <- c()
@@ -65,29 +75,36 @@ Tweet.count <- count$Freq
 
 ---
 ## Plot the Data
-```{r, fig.width=12,fig.height=6}
+```{r,eval=FALSE, fig.width=12,fig.height=6}
 df <- data.frame(realTime,Tweet.count)
 ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
+```
+```{r}
+ggplot(dat1,aes(x=time,y=count)) + geom_line()
 ```
 
 ---
 ## Tweets per Second - Minute - Hour
 Plot wiht different time resolutions
 
-```{r,echo=FALSE, fig.width=4,fig.height=6,warning=FALSE}
-df <- data.frame(realTime,Tweet.count)
-ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
-
-
+```{r,,echo=FALSE, fig.width=4,fig.height=6,warning=FALSE}
+#plot tweets per second
+ggplot(dat1,aes(x=time,y=count)) + geom_line()
 #plot tweets per minute
-minuteTimestamps <- realTime[seq(1, length(realTime), 60)]
-minutePlotDf <- data.frame(minuteTimestamps,sumMinute)
-ggplot(minutePlotDf,aes(x=minuteTimestamps,y=sumMinute)) + geom_line()
-
-
-#plot tweets per minute
-hourTimestamps <- realTime[seq(1, length(realTime), 3600)]
-hourPlotDf <- data.frame(hourTimestamps,sumHour)
-ggplot(hourPlotDf,aes(x=hourTimestamps,y=sumHour)) + geom_line()
+ggplot(dat2,aes(x=time,y=count)) + geom_line()
+#plot tweets per hour
+ggplot(dat3,aes(x=time,y=count)) + geom_line()
 ```
 
+---
+## Tweets per Day
+Plots for July the 12th - 13th - 14 | Tweets per minute
+
+```{r,,echo=FALSE, fig.width=4,fig.height=6,warning=FALSE}
+#plot tweets per second
+ggplot(dat2,aes(x=time,y=count)) + geom_line()
+#plot tweets per minute
+ggplot(dat4,aes(x=time,y=count)) + geom_line()
+#plot tweets per hour
+ggplot(dat5,aes(x=time,y=count)) + geom_line()
+```

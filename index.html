@@ -64,7 +64,12 @@
     <h2>Data Cleaning</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code>code here
+    <pre><code>Dim sr As StreamReader = New StreamReader(inputpath + file)
+Dim sw As StreamWriter = New StreamWriter(outputpath + file)
+
+&#39;Read every line
+Dim line As String
+line = sr.ReadLine()
 </code></pre>
 
   </article>
@@ -80,6 +85,7 @@
 
 <pre><code class="r">dat_twelve &lt;- fread(&#39;numeric_20140712.csv&#39;,header=F,sep=&#39;;&#39;)
 saveRDS(&quot;numeric_20140712.Rda&quot;)
+dat &lt;- readRDS(file=&quot;numeric_20140712.Rda&quot;)
 </code></pre>
 
   </article>
@@ -93,11 +99,6 @@ saveRDS(&quot;numeric_20140712.Rda&quot;)
   <article data-timings="">
     <pre><code class="r">count  &lt;- data.frame(table(dat$V3))
 count$Var1[1:5]
-</code></pre>
-
-<pre><code>## [1] 20140712000000 20140712000001 20140712000002 20140712000003
-## [5] 20140712000004
-## 85765 Levels: 20140712000000 20140712000001 20140712000002 ... 20140712235959
 </code></pre>
 
 <pre><code class="r">sumMinute &lt;- c()
@@ -121,7 +122,10 @@ Tweet.count &lt;- count$Freq
 ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5"> </p>
+<pre><code class="r">ggplot(dat1,aes(x=time,y=count)) + geom_line()
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -134,7 +138,20 @@ ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
   <article data-timings="">
     <p>Plot wiht different time resolutions</p>
 
-<p><img src="figure/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6"> <img src="figure/unnamed-chunk-6-2.png" alt="plot of chunk unnamed-chunk-6"> <img src="figure/unnamed-chunk-6-3.png" alt="plot of chunk unnamed-chunk-6"> </p>
+<p><img src="figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7"> <img src="figure/unnamed-chunk-7-2.png" alt="plot of chunk unnamed-chunk-7"> <img src="figure/unnamed-chunk-7-3.png" alt="plot of chunk unnamed-chunk-7"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Tweets per Day</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Plots for July the 12th - 13th - 14 | Tweets per minute</p>
+
+<p><img src="figure/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8"> <img src="figure/unnamed-chunk-8-2.png" alt="plot of chunk unnamed-chunk-8"> <img src="figure/unnamed-chunk-8-3.png" alt="plot of chunk unnamed-chunk-8"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -178,6 +195,12 @@ ggplot(df,aes(x=realTime,y=Tweet.count)) + geom_line()
       <a href="#" target="_self" rel='tooltip' 
         data-slide=6 title='Tweets per Second - Minute - Hour'>
          6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Tweets per Day'>
+         7
       </a>
     </li>
   </ul>
